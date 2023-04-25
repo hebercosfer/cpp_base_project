@@ -1,0 +1,8 @@
+pre_commit == 2.20.0
+pre-commit-hooks == 4.4.0
+pylint == 2.15.7
+clang-format == 15.0.4
+clang-tidy == 15.0.2
+codespell == 2.2.2
+autopep8 == 2.0.2
+cmake-format == 0.6.13
