@@ -1,0 +1,135 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "base",
+            "displayName": "base preset",
+            "binaryDir": "${sourceDir}/build-${presetName}",
+            "hidden": true
+        },
+        {
+            "name": "release",
+            "displayName": "release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "inherits": [
+                "base"
+            ]
+        },
+        {
+            "name": "dev",
+            "displayName": "dev",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "DEVELOPER_MODE": "ON",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "GENERATE_DOCS": "OFF"
+            },
+            "inherits": [
+                "base"
+            ]
+        },
+        {
+            "name": "dev-qt6",
+            "displayName": "dev-qt6",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "DEVELOPER_MODE": "ON",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "GENERATE_DOCS": "OFF",
+                "USING_QT6": "ON"
+            },
+            "inherits": [
+                "base"
+            ]
+        },
+        {
+            "name": "dev-coverage",
+            "displayName": "dev-coverage",
+            "cacheVariables": {
+                "BUILD_COVERAGE": "ON"
+            },
+            "inherits": [
+                "dev"
+            ]
+        },
+        {
+            "name": "dev-clang",
+            "displayName": "dev-clang",
+            "environment": {
+                "CXX": "clang++",
+                "CCACHE_DISABLE": "ON"
+            },
+            "inherits": [
+                "dev"
+            ]
+        },
+        {
+            "name": "dev-asan",
+            "displayName": "dev-asan",
+            "cacheVariables": {
+                "ENABLE_SANITIZERS": "ON"
+            },
+            "inherits": [
+                "dev"
+            ]
+        },
+        {
+            "name": "clazy",
+            "displayName": "clazy",
+            "environment": {
+                "CXX": "clazy",
+                "CCACHE_DISABLE": "ON"
+            },
+            "inherits": [
+                "dev"
+            ]
+        },
+        {
+            "name": "ci",
+            "displayName": "Config used by CI for the Linux and Windows builders",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "DEVELOPER_MODE": "ON",
+                "BUILD_TESTING": "ON",
+                "ENABLE_SANITIZERS": "ON"
+            },
+            "inherits": [
+                "base"
+            ]
+        },
+        {
+            "name": "ci-macos",
+            "displayName": "Config used by CI for the macOS builder",
+            "cacheVariables": {
+                "CMAKE_OSX_DEPLOYMENT_TARGET": "10.14"
+            },
+            "inherits": [
+                "ci"
+            ]
+        },
+        {
+            "name": "ci-docs",
+            "displayName": "CI Docs generation",
+            "description": "The CI docs generation config (platform independent)",
+            "cacheVariables": {
+                "BUILD_TESTING": "OFF",
+                "GENERATE_DOCS": "ON"
+            },
+            "inherits": [
+                "base"
+            ]
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "clazy",
+            "configurePreset": "clazy",
+            "environment": {
+                "CLAZY_CHECKS": "level2,detaching-member,heap-allocated-small-trivial-type,isempty-vs-count,qstring-varargs,qvariant-template-instantiation,raw-environment-function,reserve-candidates,signal-with-return-value,thread-with-slots,no-ctor-missing-parent-argument,no-missing-typeinfo",
+                "CCACHE_DISABLE": "ON"
+            }
+        }
+    ]
+}

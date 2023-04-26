@@ -87,7 +87,7 @@ styles: <https://github.com/markdownlint/markdownlint/blob/main/docs/creating_st
 ### Installation of Pre-commit Hooks
 
 For installation of the pre-commit process and some of its hooks, you will need to install Python
-and using the Package Manager for Python (pip) to install some of the hooks. The file
+and use the Package Manager for Python (pip) to install some of the hooks. The file
 requirements-dev.txt contains the packages required for this project, including the pre_commit and
 pre-commit-hooks, you can install them with the command `pip install -r requirements-dev.txt`. If
 your project would need other packages that can be installed with pip, they can be added on the
@@ -103,3 +103,8 @@ Having the Python Scripts folder in your PATH is needed, as well as the Ruby bin
 The last step to have your pre-commit automatically checking your commit, is to install the
 pre-commit on your local repository with the command: `pre-commit install`
 After that, when you commit your changes, you should see the pre-commit checks been done.
+
+The installation of the packages with pip and the pre-commit installation on this repository is
+integrated on CMake configuration, therefore you don't need to do the commands `pip install ...`
+and `pre-commit install`, but it's needed to have the environment installed and prepared to use pip.
+The Markdowlint installation with Ruby Package Manager may be needed.
